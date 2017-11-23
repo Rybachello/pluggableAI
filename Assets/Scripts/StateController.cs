@@ -15,10 +15,10 @@ namespace Assets.Scripts
         [HideInInspector] public Complete.TankShooting TankShooting;
         [HideInInspector] public List<Transform> WayPointList;
         [HideInInspector] public int NextWayPoint;
-        [HideInInspector] public Transform ChaseTarget;
+        public Transform ChaseTarget;
+        [HideInInspector] public float StateTimeElapsed;
 
         private bool _aiActive;
-
 
         private void Awake ( )
         {
@@ -55,8 +55,20 @@ namespace Assets.Scripts
         public void TransitionToState (State nextState)
         {
             if (nextState != RemainState) {
-                CurrentState = RemainState;
+                CurrentState = nextState;
+                OnExitState();
             }
+        }
+
+        public bool CheckIfCountDownElapsed (float duration)
+        {
+            StateTimeElapsed += Time.deltaTime;
+            return (StateTimeElapsed >= duration);
+        }
+
+        private void OnExitState ( )
+        {
+            StateTimeElapsed = 0;
         }
     }
 }

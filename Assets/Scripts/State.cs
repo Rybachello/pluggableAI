@@ -25,7 +25,7 @@ namespace Assets.Scripts
         {
             Transitions.ForEach(transition => {
                     var decisionSucceeded = transition.Decision.Decide(controller);
-                    controller.TransitionToState(decisionSucceeded ? transition.TrueState : transition.FalseState);
+                controller.TransitionToState(decisionSucceeded ? transition.TrueState : transition.FalseState);
                 }
             );
 

@@ -11,16 +11,20 @@ namespace Assets.Scripts
             return targetVisible;
         }
 
-        private bool Look (StateController controller)
+        private bool Look(StateController controller)
         {
             RaycastHit hit;
 
-            if (Physics.SphereCast(controller.Eyes.transform.position, controller.EnemyStats.lookSphereCastRadius,
-                    controller.Eyes.forward, out hit, controller.EnemyStats.lookRange) &&
-                hit.collider.CompareTag("Player")) {
+            Debug.DrawRay(controller.Eyes.position, controller.Eyes.forward.normalized * controller.EnemyStats.lookRange, Color.green);
+
+            if (Physics.SphereCast(controller.Eyes.position, controller.EnemyStats.lookSphereCastRadius, controller.Eyes.forward, out hit, controller.EnemyStats.lookRange)
+                && hit.collider.CompareTag("Player"))
+            {
                 controller.ChaseTarget = hit.transform;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
