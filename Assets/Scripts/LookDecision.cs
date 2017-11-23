@@ -5,12 +5,14 @@ namespace Assets.Scripts
     [CreateAssetMenu(menuName = "PluggableAI/Decisions/Look")]
     public class LookDecision : Decision
     {
-        public override bool Decide (StateController controller) {
+        public override bool Decide (StateController controller)
+        {
             var targetVisible = Look(controller);
             return targetVisible;
         }
 
-        private bool Look (StateController controller) {
+        private bool Look (StateController controller)
+        {
             RaycastHit hit;
 
             if (Physics.SphereCast(controller.Eyes.transform.position, controller.EnemyStats.lookSphereCastRadius,

@@ -3,13 +3,15 @@
 namespace Assets.Scripts
 {
     [CreateAssetMenu(menuName = "PluggableAI/Action/Patrol")]
-    public class PatrolAction : Action {
-
-        public override void Act (StateController controller) {
+    public class PatrolAction : Action
+    {
+        public override void Act (StateController controller)
+        {
             Patrol(controller);
         }
 
-        private void Patrol (StateController controller) {
+        private void Patrol (StateController controller)
+        {
             controller.NavMeshAgent.destination = controller.WayPointList[controller.NextWayPoint].position;
             controller.NavMeshAgent.isStopped = false;
             if (controller.NavMeshAgent.remainingDistance <= controller.NavMeshAgent.stoppingDistance &&

@@ -7,9 +7,10 @@ namespace Assets.Scripts
     public class StateController : MonoBehaviour
     {
         public State CurrentState;
+        public State RemainState;
         public EnemyStats EnemyStats;
         public Transform Eyes;
-    
+
         [HideInInspector] public NavMeshAgent NavMeshAgent;
         [HideInInspector] public Complete.TankShooting TankShooting;
         [HideInInspector] public List<Transform> WayPointList;
@@ -17,33 +18,44 @@ namespace Assets.Scripts
         [HideInInspector] public Transform ChaseTarget;
 
         private bool _aiActive;
-   
 
-        private void Awake ( ) {
+
+        private void Awake ( )
+        {
             TankShooting = GetComponent<Complete.TankShooting>();
             NavMeshAgent = GetComponent<NavMeshAgent>();
         }
 
-        private void Update ( ) {
+        private void Update ( )
+        {
             if (!_aiActive)
                 return;
             CurrentState.UpdateState(this);
         }
 
-        private void OnDrawGizmos ( ) {
+        private void OnDrawGizmos ( )
+        {
             if (CurrentState != null && Eyes != null) {
                 Gizmos.color = CurrentState.SceneGizmosColor;
                 Gizmos.DrawWireSphere(Eyes.transform.position, EnemyStats.lookSphereCastRadius);
             }
         }
 
-        public void SetupAI (bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager) {
+        public void SetupAI (bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager)
+        {
             WayPointList = wayPointsFromTankManager;
             _aiActive = aiActivationFromTankManager;
             if (_aiActive) {
                 NavMeshAgent.enabled = true;
             } else {
                 NavMeshAgent.enabled = false;
+            }
+        }
+
+        public void TransitionToState (State nextState)
+        {
+            if (nextState != RemainState) {
+                CurrentState = RemainState;
             }
         }
     }
