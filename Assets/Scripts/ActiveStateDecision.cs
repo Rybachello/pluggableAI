@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts {
+namespace Assets.Scripts
+{
     [CreateAssetMenu(menuName = "PluggableAI/Decisions/ActiveState")]
     public class ActiveStateDecision : Decision
     {
