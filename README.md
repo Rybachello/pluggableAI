@@ -1,2 +1,2 @@
 # pluggableAI
-self-education. Finite-State-Machine
+Self-educational project. Finite State Machine based AI system.
